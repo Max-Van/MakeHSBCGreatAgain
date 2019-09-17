@@ -277,7 +277,11 @@ According to [Guideline](https://github.com/IBM/cognitive-social-crm?cm_sp=Devel
 
 It can analyze any twitter(I set it as realDonaldTrump now, it can be changed to any twitter handle or hashtag). 
 i follow the guideline and it's working 
+![IBM Cloud](https://cdn-std.droplr.net/files/acc_136293/l4O7n1)
 
 your guys can visit [it here](https://cognitive-social-crm-noisy-kudu.mybluemix.net)
+
+![Twitter Analysis](https://cdn-std.droplr.net/files/acc_136293/H6BiBn)
+
 
 Max
