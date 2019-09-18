@@ -77,7 +77,7 @@ db = pymysql.connect(host='localhost',
 cursor =db.cursor()
 #create_db()
 
-newID ='1161767691646115840'
+newID ='1148573632869875712'
 cursor.execute('SELECT * FROM twitterscraper WHERE ID < "'+newID+'"')
 results = cursor.fetchall()
 count = 0
