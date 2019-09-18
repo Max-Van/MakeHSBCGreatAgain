@@ -1,5 +1,5 @@
 # Refer to API : https://googleapis.github.io/google-cloud-python/latest/language/usage.html
-# https://cloud.google.com/natural-language/docs/reference/rest/v1/documents/classifyText
+# https://cloud.google.com/natural-language/docs/basics#sentiment_analysis
 
 # Imports the Google Cloud client library
 from google.cloud import language

@@ -27,7 +27,11 @@ def create_db() :
         )  DEFAULT CHARSET=UTF8MB4 """
     cursor.execute(sql)
 
-def save_into_db(rcd) :
+
+# def update_sql() :
+
+
+def update_sql(rcd,mysql1) :
     # Analyze the Classification 
     myrcd = rcd
     mycat = tc.analyzeclass(myrcd[3])
@@ -49,7 +53,8 @@ def save_into_db(rcd) :
 
     processnow = datetime.datetime.now()
     processnow = processnow.strftime("%Y-%m-%d %H:%M:%S")
-    mysql = 'insert into twitterscrapernew(ID,url,datetime,text,user_id,usernameTweet,sentiment,magnitude,classify_name,classify_confidence,processdatetime,processind) values("%s","%s","%s","%s","%s","%s","%f","%f","%s","%f","%s","%s")' \
+    
+    mysql = 'insert into twitterscrapernew(ID,url,datetime,text,user_id,usernameTweet,sentiment,magnitude,classify_name,classify_confidence,processdatetime,processind) values("%s","%s","%s","%s","%s","%s","%f","%f","%s","%f","%s","%s");' \
         %(pymysql.escape_string(myrcd[0]),
         pymysql.escape_string(myrcd[1]),
         pymysql.escape_string(myrcd[2]),
@@ -63,12 +68,13 @@ def save_into_db(rcd) :
         processnow,
         'Y'
         )
-    print(mysql)
-    try:
-        cursor.execute(mysql)
-        db.commit()
-    except:
-        print("*****************************error at sql %s while save data into DB" %sql)  
+    mysql1 = mysql1 + mysql 
+    print(mysql1)
+    # try:
+    #     cursor.execute(mysql)
+    #     db.commit()
+    # except:
+    #     print("*****************************error at sql %s while save data into DB" %sql)  
 
 db = pymysql.connect(host='localhost',
                              port=3306,
@@ -79,10 +85,11 @@ db = pymysql.connect(host='localhost',
 cursor =db.cursor()
 #create_db()
 
-newID ='1140059245456633858'
-cursor.execute('SELECT * FROM twitterscraper WHERE ID < "'+newID+'"')
+newID ='1137112921991983105'
+cursor.execute('SELECT * FROM twitterscraper WHERE ID <= "'+newID+'"')
 results = cursor.fetchall()
 count = 0
+mysql1 = ''
 
 
 for rcd in results :
@@ -93,13 +100,14 @@ for rcd in results :
     print('text:',rcd[3])
     print('user_id:',rcd[4])
     print('usernameTweet:',rcd[5])
-    save_into_db(rcd)
+    update_sql(rcd,mysql1)
+
     #time.sleep(10)
     count= count + 1 
     if count % 10 == 0 :
+        # save_into_db()
         print('Pausing for a bit...count is',count)
-        time.sleep(20)
+        time.sleep(30)
     #if count == 3 :
     #    break 
-
 db.close()
