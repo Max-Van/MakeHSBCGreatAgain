@@ -1,9 +1,6 @@
 NLP Investigation 
 ============
-<<<<<<< HEAD
-#test
-=======
->>>>>>> 76537fa2b3cc37c65305ebd819e72036024134de
+
 ## Two Testings
 
 * NLP with GCP
