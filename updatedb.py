@@ -49,7 +49,7 @@ def save_into_db(rcd) :
 
     processnow = datetime.datetime.now()
     processnow = processnow.strftime("%Y-%m-%d %H:%M:%S")
-    mysql = 'insert into twitterscrapernew(ID,url,datetime,text,user_id,usernameTweet,sentiment,magnitude,classify_name,classify_confidence,processdatetime,processind) values("%s","%s","%s","%s","%s","%s","%f","%f","%s","%f","%s","%s")' \
+    mysql = 'insert into twitterscraper_filtered_nlp(ID,url,datetime,text,user_id,usernameTweet,sentiment,magnitude,classify_name,classify_confidence,processdatetime,processind) values("%s","%s","%s","%s","%s","%s","%f","%f","%s","%f","%s","%s")' \
         %(pymysql.escape_string(myrcd[0]),
         pymysql.escape_string(myrcd[1]),
         pymysql.escape_string(myrcd[2]),
@@ -66,7 +66,7 @@ def save_into_db(rcd) :
     print(mysql)
     try:
         cursor.execute(mysql)
-        db.commit()
+        #db.commit()
     except:
         print("*****************************error at sql %s while save data into DB" %sql)  
 
@@ -79,8 +79,9 @@ db = pymysql.connect(host='localhost',
 cursor =db.cursor()
 #create_db()
 
-newID ='1140059245456633858'
-cursor.execute('SELECT * FROM twitterscraper WHERE ID < "'+newID+'"')
+#newID ='1003328970069331968'
+#cursor.execute('SELECT * FROM twitterscraper_filtered WHERE ID < "'+newID+'"')
+cursor.execute('select * from MaxDB.twitterscraper_filtered where ID not in (select ID from MaxDB.twitterscraper_filtered_nlp)')
 results = cursor.fetchall()
 count = 0
 
@@ -96,7 +97,8 @@ for rcd in results :
     save_into_db(rcd)
     #time.sleep(10)
     count= count + 1 
-    if count % 10 == 0 :
+    if count % 100 == 0 :
+        db.commit()
         print('Pausing for a bit...count is',count)
         time.sleep(20)
     #if count == 3 :
