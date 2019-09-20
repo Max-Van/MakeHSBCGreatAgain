@@ -98,7 +98,7 @@ for rcd in results :
     #time.sleep(10)
     count= count + 1 
     if count % 100 == 0 :
-        #db.commit()
+        db.commit()
         print('Pausing for a bit...count is',count)
         time.sleep(20)
     #if count == 3 :
