@@ -31,7 +31,13 @@ def testtone(tweettext):
         print ('Method failed with status code ' + str(ex.code) + ': ' + ex.message)
         return False 
 
-b=testtone('i hate you')
+
+text = 'Team, I know that times are tough! Product '\
+     'sales have been disappointing for the past three '\
+     'quarters. We have a competitive product, but we '\
+     'need to do a better job of selling it!'
+
+b=testtone(text)
 
 if b == False :
     print ('analysis result is empty ')
